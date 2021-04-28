@@ -24,3 +24,4 @@ let a = 10,
 a = b + a;
 b = a - b;
 a = a - b;
+console.log(a, b);
