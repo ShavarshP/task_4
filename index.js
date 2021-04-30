@@ -168,13 +168,22 @@ const string = (string, arr) => {
   }
   return console.log(newString);
 };
+
 //task13
 const filteArray = (arr) => {
   let newArr = [];
+  let newArr2 = [];
   for (var i = 0; i < arr.length; i++) {
     if (Number.isInteger(arr[i])) {
-      newArr.push(arr[i]);
+      if (arr[i] % 2 === 0) {
+        newArr2.push(arr[i]);
+      } else {
+        newArr.push(arr[i]);
+      }
     }
+  }
+  for (var i = 0; i < newArr2.length; i++) {
+    newArr.push(newArr2[i]);
   }
   return console.log(newArr);
 };
@@ -258,13 +267,16 @@ const sumOfArrey = (arr) => {
 //task20
 const arr15 = () => {
   let k = 1;
+  let string = "";
   let newArr = [[], [], [], [], []];
   for (var i = 0; i < 5; i++) {
-    for (var j = i; j < i + 5; j++) {
-      newArr[i].push(j);
+    for (var j = i; j < 5; j++) {
+      newArr[j].push(k);
+      k++;
     }
+    string = newArr[i].toString();
+    console.log(string);
   }
-  return console.log(newArr);
 };
 
 //Optional Tasks.1
@@ -294,13 +306,70 @@ const findDifference = (number) => {
   return console.log(max - min);
 };
 //Optional Tasks.2
+
 const toBase10 = (number) => {
-  number += "";
   let sum = 0;
   for (var i = 0; i < number.length; i++) {
     if (number[i] == 1) {
-      sum += 2**i;
+      sum += 2 ** i;
     }
   }
-  return sum;
+  number = sum.sort((a, b) => a - b);
+  return console.log(number);
+};
+
+//Optional Tasks.3
+
+const sumOfArrey2 = (array, array2) => {
+  for (var i = 0; i < array2.length; i++) {
+    array.push(array2[i]);
+  }
+  console.log(array);
+};
+
+//Optional Tasks.4
+const factorial = (index) => {
+  let index2 = 1;
+  for (var i = 1; i <= index; i++) {
+    index2 *= i;
+  }
+  return console.log(index2);
+};
+
+//Optional Tasks.5
+
+const isValid = (arr) => {
+  let newarr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (/[a-z]/.test(arr[i])) {
+      newarr[0] = true;
+    }
+    if (/[A-Z]/.test(arr[i])) {
+      newarr[1] = true;
+    }
+    if (/[$#@]/.test(arr[i])) {
+      newarr[2] = true;
+    }
+    if (/[0-9]/.test(arr[i])) {
+      newarr[3] = true;
+    }
+    if (arr.length >= 6) {
+      newarr[4] = true;
+    }
+    if (arr.length <= 16) {
+      newarr[5] = true;
+    }
+  }
+  if (
+    newarr[0] &&
+    newarr[1] &&
+    newarr[2] &&
+    newarr[3] &&
+    newarr[4] &&
+    newarr[5]
+  ) {
+    return console.log("Valid");
+  }else {
+    return console.log("Invalid");
+  }
 };
