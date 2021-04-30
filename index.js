@@ -268,10 +268,11 @@ const sumOfArrey = (arr) => {
 const arr15 = () => {
   let k = 1;
   let string = "";
-  let newArr = [[], [], [], [], []];
+  let newArr = [];
   for (var i = 0; i < 5; i++) {
     for (var j = i; j < 5; j++) {
-      newArr[j].push(k);
+      newArr.push("");
+      newArr[j] += k + " ";
       k++;
     }
     string = newArr[i].toString();
@@ -369,7 +370,7 @@ const isValid = (arr) => {
     newarr[5]
   ) {
     return console.log("Valid");
-  }else {
+  } else {
     return console.log("Invalid");
   }
 };
