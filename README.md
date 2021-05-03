@@ -15,8 +15,8 @@ null + 1=1         because the operator + changes type on string
 undefined + 1 NaN  because the operator + changes type on string
 ```
 # GTU 01 test didn't guess right
-## 7, 8, 28
-
+## 7,8,28
+```
 Number('0x77') === 0x77
 Number('077') === 077
 Number(' 12')
@@ -46,3 +46,4 @@ parseFloat('I’m the best value - said Infinity.')
 parseInt('Infinity is the best value!')
 parseFloat('Infinity is the best value!')
 parseFloat('12.78ff')
+```
