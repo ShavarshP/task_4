@@ -1,0 +1,18 @@
+
+*{
+  margin: 0px;
+
+}
+
+#container{
+  background-color: hsl(50, 13%, 45%) ;
+  position: relative;
+  left: 100px;
+  top:20px
+
+}
+.imgfader1{
+  z-index: 1;
+  background-color: red;
+  display: flex;
+}

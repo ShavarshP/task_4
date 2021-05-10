@@ -1,0 +1,24 @@
+.flex-container {
+  display: flex;
+  background-color: hsl(50, 33%, 95%);
+  width: 360px;
+  flex-wrap: wrap;
+  height: 100%;
+  align-content: space-between;
+  justify-content: space-around;
+  background: yellowgreen(255, 255, 128, 0.1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.flex-container > div  {
+  background-color: hsl(50, 33%, 65%);
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  cursor: pointer;
+}
