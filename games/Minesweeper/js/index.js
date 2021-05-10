@@ -3,8 +3,6 @@ const Coefficient = 50; //the number of enemies and walls depends on this value
 
 const childsizblock = 30;
 
-
-
 const createTileValues = (theSize) => {
   const value = [];
   for (let i = 0; i < theSize; i++) {
@@ -54,7 +52,6 @@ function randomIndex(min, max) {
 
 const createPlayers = (loc, numb) => {
   const players = loc.map((t, i) => {
-
     return {
       name: "Walls",
       loc: t,
@@ -77,7 +74,6 @@ const placePlayers = (tileValues, players) => {
 /////
 
 const render = (tableOfGame, siz, sizblock) => {
-
   document.getElementById("container").innerHTML = "";
   document.getElementById("container").style.width = siz * sizblock + "px";
   document.getElementById("container").style.height = siz * sizblock + "px";
@@ -98,9 +94,14 @@ const render = (tableOfGame, siz, sizblock) => {
       blokchild[j].class = "imgfader1";
       blokchild[j].style.width = sizblock - 4 + "px";
       blokchild[j].style.height = sizblock - 4 + "px";
-      blokchild[j].style.backgroundColor ="hsl(50, 13%, 65%)";
+      blokchild[j].style.backgroundColor = "hsl(50, 13%, 65%)";
       blok[i].appendChild(blokchild[j]);
       if (tableOfGame[i][j]) {
+        if (Number(tableOfGame[i][j])) {
+          console.log("maladec");
+          blokchild[j].innerHTML = tableOfGame[i][j];
+          continue;
+        }
         let img = document.createElement("img");
         img.style.width = sizblock - 4 + "px";
         img.style.height = sizblock - 4 + "px";
@@ -112,24 +113,38 @@ const render = (tableOfGame, siz, sizblock) => {
 };
 
 ///////////////////////////////
-const nearbyBombs=(loc, gloLoc)=>{
-
+const nearbyBombs = (loc, gloLoc) => {
   console.log(loc);
   console.log(gloLoc);
-  // for (var i = 0; i < loc.length; i++) {
-  //   gloLoc[(loc[i][0])+1][(loc[i][1]+1)]+=1
-  //   gloLoc[(loc[i][0])+1][loc[i][1]]+=1
-  //   gloLoc[(loc[i][0])+1][(loc[i][1])-1]+=1
-  //   gloLoc[loc[i][0]][(loc[i][1])-1]+=1
-  //   gloLoc[loc[i][0]][(loc[i][1])+1]+=1
-  //   gloLoc[(loc[i][0])-1][(loc[i][1]+1)]+=1
-  //   gloLoc[(loc[i][0])-1][loc[i][1]]+=1
-  //   gloLoc[(loc[i][0])-1][(loc[i][1])-1]+=1
-  //
-  // }
-}
+  for (var i = 0; i < loc.length; i++) {
+    console.log("maladec");
+    if (Number(gloLoc[loc[i][1]][loc[i][0] - 1]+1)) {
+      gloLoc[loc[i][1]][loc[i][0] - 1] += 1;
+    }
+    if (Number(gloLoc[loc[i][1]][loc[i][0] + 1]+1)) {
+      gloLoc[loc[i][1]][loc[i][0] + 1] += 1;
+    }
+    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0]]+1)) {
+      gloLoc[loc[i][1] + 1][loc[i][0]] += 1;
+    }
+    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0]]+1)) {
+      gloLoc[loc[i][1] - 1][loc[i][0]] += 1;
+    }
+    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] - 1]+1)) {
+      gloLoc[loc[i][1] - 1][loc[i][0] - 1] += 1;
+    }
+    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] + 1]+1)) {
+      gloLoc[loc[i][1] - 1][loc[i][0] + 1] += 1;
+    }
+    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0] - 1]+1)) {
+      gloLoc[loc[i][1] + 1][loc[i][0] - 1] += 1;
+    }
+    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0] + 1]+1)) {
+      gloLoc[loc[i][1] + 1][loc[i][0] + 1] += 1;
+    }
+  }
+};
 //////
-
 
 const coefficient2 = createParticipants(Gamesiz, Coefficient);
 let locations = createLocations(coefficient2 + 2, Gamesiz - 1); //house and hare-2
@@ -140,7 +155,7 @@ const Locations = () => {
   const Players = createPlayers(locations, coefficient2 / 2); //number of wolves==number of wolves
 
   const PlacePlayers = placePlayers(TileValues, Players); //place players by coordinates
-  nearbyBombs(locations,PlacePlayers)
+  nearbyBombs(locations, PlacePlayers);
 
   render(PlacePlayers, Gamesiz, childsizblock);
 };
