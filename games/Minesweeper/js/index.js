@@ -1,5 +1,5 @@
-const Gamesiz = 12;
-const Coefficient = 50; //the number of enemies and walls depends on this value
+const Gamesiz = 13;
+const Coefficient = 30; //the number of enemies and walls depends on this value
 
 const childsizblock = 30;
 
@@ -124,7 +124,7 @@ const nearbyBombs = (loc, gloLoc) => {
     if (Number(gloLoc[loc[i][1]][loc[i][0] + 1]+1)) {
       gloLoc[loc[i][1]][loc[i][0] + 1] += 1;
     }
-    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0]]+1)) {
+    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0]]+1)) {
       gloLoc[loc[i][1] + 1][loc[i][0]] += 1;
     }
     if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0]]+1)) {
@@ -136,10 +136,10 @@ const nearbyBombs = (loc, gloLoc) => {
     if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] + 1]+1)) {
       gloLoc[loc[i][1] - 1][loc[i][0] + 1] += 1;
     }
-    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0] - 1]+1)) {
+    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0] - 1]+1)) {
       gloLoc[loc[i][1] + 1][loc[i][0] - 1] += 1;
     }
-    if (loc[i][1]!==11 && Number(gloLoc[loc[i][1] + 1][loc[i][0] + 1]+1)) {
+    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0] + 1]+1)) {
       gloLoc[loc[i][1] + 1][loc[i][0] + 1] += 1;
     }
   }

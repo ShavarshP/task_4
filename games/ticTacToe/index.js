@@ -40,7 +40,7 @@ const check = () => {
   }
 
   if (isWon(arrX)) {
-    alert("O  won ");
+    alert("X  won ");
   }
   if (isWon(arrY)) {
     alert("O  won ");
