@@ -1,5 +1,5 @@
-const Gamesiz = 13;
-const Coefficient = 30; //the number of enemies and walls depends on this value
+const Gamesiz = 12;
+const Coefficient = 50; //the number of enemies and walls depends on this value
 
 const childsizblock = 30;
 
@@ -94,12 +94,27 @@ const render = (tableOfGame, siz, sizblock) => {
       blokchild[j].class = "imgfader1";
       blokchild[j].style.width = sizblock - 4 + "px";
       blokchild[j].style.height = sizblock - 4 + "px";
-      blokchild[j].style.backgroundColor = "hsl(50, 13%, 65%)";
+      blokchild[j].style.backgroundColor = "hsl(50, 13%, 55%)";
       blok[i].appendChild(blokchild[j]);
-      if (tableOfGame[i][j]) {
+      blokchild[j].addEventListener("click", () => {
+        console.log(j, i);
+        console.log(tableOfGame[i][j]);
+        tableOfGame[i][j] = null;
+        render(tableOfGame, siz, sizblock);
+        setTimeout(function () {
+          opensBox([j, i], tableOfGame, () => {
+            render(tableOfGame, siz, sizblock);
+          },20);
+        }, 100);
+      });
+      if (tableOfGame[i][j] || tableOfGame[i][j] === null) {
         if (Number(tableOfGame[i][j])) {
-          console.log("maladec");
           blokchild[j].innerHTML = tableOfGame[i][j];
+          blokchild[j].style.backgroundColor = "hsl(50, 13%, 85%)";
+          continue;
+        }
+        if (tableOfGame[i][j] === null) {
+          blokchild[j].style.backgroundColor = "hsl(50, 13%, 85%)";
           continue;
         }
         let img = document.createElement("img");
@@ -112,34 +127,107 @@ const render = (tableOfGame, siz, sizblock) => {
   }
 };
 
+//
+const opensBox = (loc, gloLoc, func, tim) => {
+  console.log("f");
+  if (Number(gloLoc[loc[1]][loc[0] - 1] + 1) && !gloLoc[loc[1]][loc[0] - 1] && tim>0 ) {
+    gloLoc[loc[1]][loc[0] - 1] = null;
+    tim--
+    opensBox([loc[1],loc[0] - 1], gloLoc, func, tim)
+
+  }
+  if (Number(gloLoc[loc[1]][loc[0] + 1] + 1) && !gloLoc[loc[1]][loc[0] + 1] && tim>0) {
+    gloLoc[loc[1]][loc[0] + 1] = null;
+    tim--
+    opensBox([loc[1],loc[0] + 1], gloLoc, func, tim)
+  }
+  if (
+    loc[1] !== Gamesiz - 1 &&
+    Number(gloLoc[loc[1] + 1][loc[0]] + 1) &&
+    !gloLoc[loc[1] + 1][loc[0]] && tim>0
+  ) {
+    gloLoc[loc[1] + 1][loc[0]] = null;
+    tim--
+    opensBox([loc[1] + 1,loc[0]], gloLoc, func, tim)
+  }
+  if (
+    loc[1] !== 0 &&
+    Number(gloLoc[loc[1] - 1][loc[0]] + 1) &&
+    !gloLoc[loc[1] - 1][loc[0]] && tim
+  ) {
+    tim--
+    gloLoc[loc[1] - 1][loc[0]] = null;
+    opensBox([loc[1] - 1,loc[0]], gloLoc, func, tim)
+  }
+  if (
+    loc[1] !== 0 &&
+    Number(gloLoc[loc[1] - 1][loc[0] - 1] + 1) &&
+    !gloLoc[loc[1] - 1][loc[0] - 1]
+  ) {
+    gloLoc[loc[1] - 1][loc[0] - 1] = null;
+
+  }
+  if (
+    loc[1] !== 0 &&
+    Number(gloLoc[loc[1] - 1][loc[0] + 1] + 1) &&
+    !gloLoc[loc[1] - 1][loc[0] + 1]
+  ) {
+    gloLoc[loc[1] - 1][loc[0] + 1] = null;
+
+  }
+  if (
+    loc[1] !== Gamesiz - 1 &&
+    Number(gloLoc[loc[1] + 1][loc[0] - 1] + 1) &&
+    !gloLoc[loc[1] + 1][loc[0] - 1] && !(gloLoc[loc[1] + 1][loc[0] - 1])
+  ) {
+    gloLoc[loc[1] + 1][loc[0] - 1] = null;
+
+
+  }
+  if (
+    loc[1] !== Gamesiz - 1 &&
+    Number(gloLoc[loc[1] + 1][loc[0] + 1] + 1) &&
+    !gloLoc[loc[1] + 1][loc[0] + 1]
+  ) {
+    gloLoc[loc[1] + 1][loc[0] + 1] = null;
+
+  }
+  func();
+};
 ///////////////////////////////
 const nearbyBombs = (loc, gloLoc) => {
-  console.log(loc);
-  console.log(gloLoc);
   for (var i = 0; i < loc.length; i++) {
-    console.log("maladec");
-    if (Number(gloLoc[loc[i][1]][loc[i][0] - 1]+1)) {
+    if (Number(gloLoc[loc[i][1]][loc[i][0] - 1] + 1)) {
       gloLoc[loc[i][1]][loc[i][0] - 1] += 1;
     }
-    if (Number(gloLoc[loc[i][1]][loc[i][0] + 1]+1)) {
+    if (Number(gloLoc[loc[i][1]][loc[i][0] + 1] + 1)) {
       gloLoc[loc[i][1]][loc[i][0] + 1] += 1;
     }
-    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0]]+1)) {
+    if (
+      loc[i][1] !== Gamesiz - 1 &&
+      Number(gloLoc[loc[i][1] + 1][loc[i][0]] + 1)
+    ) {
       gloLoc[loc[i][1] + 1][loc[i][0]] += 1;
     }
-    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0]]+1)) {
+    if (loc[i][1] !== 0 && Number(gloLoc[loc[i][1] - 1][loc[i][0]] + 1)) {
       gloLoc[loc[i][1] - 1][loc[i][0]] += 1;
     }
-    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] - 1]+1)) {
+    if (loc[i][1] !== 0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] - 1] + 1)) {
       gloLoc[loc[i][1] - 1][loc[i][0] - 1] += 1;
     }
-    if (loc[i][1]!==0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] + 1]+1)) {
+    if (loc[i][1] !== 0 && Number(gloLoc[loc[i][1] - 1][loc[i][0] + 1] + 1)) {
       gloLoc[loc[i][1] - 1][loc[i][0] + 1] += 1;
     }
-    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0] - 1]+1)) {
+    if (
+      loc[i][1] !== Gamesiz - 1 &&
+      Number(gloLoc[loc[i][1] + 1][loc[i][0] - 1] + 1)
+    ) {
       gloLoc[loc[i][1] + 1][loc[i][0] - 1] += 1;
     }
-    if (loc[i][1]!==Gamesiz-1 && Number(gloLoc[loc[i][1] + 1][loc[i][0] + 1]+1)) {
+    if (
+      loc[i][1] !== Gamesiz - 1 &&
+      Number(gloLoc[loc[i][1] + 1][loc[i][0] + 1] + 1)
+    ) {
       gloLoc[loc[i][1] + 1][loc[i][0] + 1] += 1;
     }
   }
