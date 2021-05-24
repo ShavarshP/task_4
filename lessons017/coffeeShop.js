@@ -20,6 +20,19 @@ class CoffeeShop {
       return "This item is currently unavailable!";
     }
   }
+  dueAmount(){
+    console.log(this.orders);
+    let newPrice=0
+    return this.orders.reduce((acc, item)=>{
+      newPrice=0
+      this.manue.filter((t) => {
+        if(item == t.name){
+          newPrice=t.price
+        }
+      })
+      return acc+=newPrice
+    },0)
+  }
   fulfillOrder() {
     if (this.orders) {
       return "The {item} is ready!";
