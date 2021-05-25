@@ -7,9 +7,9 @@ class Shiritory {
   }
   play(world) {
     if (
-      this.arr.length == 0 ||
-      (this.arr.filter((t) => t == world).length == 0 &&
-        this.lastWorld[this.lastWorld.length - 1] == world[0] &&
+      this.arr.length === 0 ||
+      (this.arr.filter((t) => t === world).length === 0 &&
+        this.lastWorld[this.lastWorld.length - 1] === world[0] &&
         !this.over)
     ) {
       this.lastWorld = world;
