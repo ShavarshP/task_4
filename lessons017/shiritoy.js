@@ -5,6 +5,7 @@ class Shiritory {
     this.lastWorld = "";
     this.over = false;
   }
+  
   play(world) {
     if (
       this.arr.length === 0 ||
@@ -20,6 +21,15 @@ class Shiritory {
       return this.arr;
     }
   }
+
+  restart(){
+    this.arr = [];
+    this.gameOver = [];
+    this.lastWorld = "";
+    this.over = false;
+
+  }
+
   gameOver() {
     return this.over;
   }
