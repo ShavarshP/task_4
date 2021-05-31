@@ -1,9 +1,8 @@
 const sortIndex = (arr, index = 1) => {
-  if (arr.length <= index) {
+  if (arr.length <= index || arr.length==1) {
     return -1;
   }
-  if (arr[index] >= arr[index - 1]) {
-  } else {
+  if (arr[index] < arr[index - 1]) {
     return index;
   }
   return sortIndex(arr, index + 1);
