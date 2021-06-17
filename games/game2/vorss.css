@@ -1,0 +1,106 @@
+body{
+  background-color: #494c6e;
+  margin: 0px;
+  perspective: 1000px;
+}
+#gamePage{
+
+  width: 1000px;
+  height: 500px;
+  background-color: #d2d2d2;
+  border: 4px inset black;
+
+}
+#fon{
+  width: 1000px;
+  height: 500px;
+
+}
+#gamePagefather{
+  z-index: 1;
+  margin-top: 50px;
+  margin-left: 180px;
+  position: absolute;
+  overflow: hidden;
+
+
+}
+#gamePagep{
+  z-index: 2;
+  width: 1100px;
+  height: 500px;
+
+
+}
+#gamePagefatherp{
+  z-index: 2;
+  position: absolute;
+  overflow: hidden;
+
+}
+#net{
+  position: absolute;
+  left: 920px;
+  top: 300px;
+}
+#axex{
+  left: 920px;
+  top: 300px;
+  position: absolute;
+}
+#netimg{
+  width: 80px;
+  height: 100px;
+}
+#axeximg{
+  width: 80px;
+  height: 100px;
+  transform: rotate(40deg);
+}
+#rezult{
+
+}
+#blokfatherp{
+
+  z-index: 3;
+  left: 920px;
+  top: 290px;
+  position: absolute;
+  width: 80px;
+  height: 120px;
+
+
+}
+#blokuxi{
+  z-index: 12;
+  position: absolute;
+  top: 200px;
+  left: 7px;
+  height: 103px;
+  width: 10px;
+  overflow: hidden;
+  background-color: #dada3b;
+}
+
+#blokuxii{
+  margin-top: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: #982222;
+
+  border-radius: 50%;
+}
+#ujachap{
+  position: relative;
+  display: flex;
+  height: 20px;
+  width: 240px;
+  border: 4px inset black;
+  left: 760px;
+}
+.uj{
+
+  height: 18px;
+  width: 30px;
+  border: 1px solid #76799a;
+}

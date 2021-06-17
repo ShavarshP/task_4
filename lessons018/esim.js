@@ -1,4 +1,8 @@
 const esim = (str, index = 0, newArr = []) => {
+  if (str.length / 2 === index + 1) {
+    newArr = [...newArr, str[index]];
+    return esim(str, index + 1, newArr);
+  }
   if (str.length / 2 > index + 1) {
     newArr = [...newArr, str[index], "("];
     return esim(str, index + 1, newArr);
